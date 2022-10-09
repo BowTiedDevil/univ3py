@@ -1,7 +1,6 @@
 from typing import Tuple
-import SqrtPriceMath
-import FullMath
-from Helpers import uint256
+from . import SqrtPriceMath, FullMath
+from .Helpers import uint256
 
 
 def computeSwapStep(

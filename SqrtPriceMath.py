@@ -1,7 +1,5 @@
-import FullMath
-import FixedPoint96
-import UnsafeMath
-from Helpers import uint128, uint256
+from . import FullMath, FixedPoint96, UnsafeMath
+from .Helpers import uint128, uint256
 
 
 def getNextSqrtPriceFromAmount0RoundingUp(

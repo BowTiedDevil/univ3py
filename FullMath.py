@@ -1,4 +1,4 @@
-import YulOperations as yul
+from . import YulOperations as yul
 
 
 def mulDiv(a, b, denominator):
