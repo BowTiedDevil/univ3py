@@ -115,7 +115,7 @@ def getAmount0Delta(
                 sqrtRatioAX96,
             )
             if roundUp
-            else FullMath.mulDiv(numerator1, numerator2, sqrtRatioBX96) / sqrtRatioAX96
+            else FullMath.mulDiv(numerator1, numerator2, sqrtRatioBX96) // sqrtRatioAX96
         )
 
     else:
