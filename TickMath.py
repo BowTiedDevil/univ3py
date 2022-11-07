@@ -58,7 +58,7 @@ def getSqrtRatioAtTick(tick: int) -> int:
         ratio = (ratio * 0x48A170391F7DC42444E8FA2) >> 128
 
     if tick > 0:
-        ratio = (2 ** 256 - 1) // ratio
+        ratio = (2**256 - 1) // ratio
 
     # this divides by 1<<32 rounding up to go from a Q128.128 to a Q128.96
     # we then downcast because we know the result always fits within 160 bits due to our tick input constraint
@@ -69,7 +69,9 @@ def getSqrtRatioAtTick(tick: int) -> int:
 def getTickAtSqrtRatio(sqrtPriceX96: int) -> int:
 
     # second inequality must be < because the price can never reach the price at the max tick
-    assert sqrtPriceX96 >= MIN_SQRT_RATIO and sqrtPriceX96 < MAX_SQRT_RATIO, "R"
+    assert (
+        sqrtPriceX96 >= MIN_SQRT_RATIO and sqrtPriceX96 < MAX_SQRT_RATIO
+    ), "R"
     ratio = uint256(sqrtPriceX96) << 32
 
     r: int = ratio
@@ -188,13 +190,19 @@ def getTickAtSqrtRatio(sqrtPriceX96: int) -> int:
 
     log_sqrt10001 = log_2 * 255738958999603826347141  # 128.128 number
 
-    tickLow = int24((log_sqrt10001 - 3402992956809132418596140100660247210) >> 128)
-    tickHi = int24((log_sqrt10001 + 291339464771989622907027621153398088495) >> 128)
+    tickLow = int24(
+        (log_sqrt10001 - 3402992956809132418596140100660247210) >> 128
+    )
+    tickHi = int24(
+        (log_sqrt10001 + 291339464771989622907027621153398088495) >> 128
+    )
 
     tick = (
         tickLow
         if (tickLow == tickHi)
-        else (tickHi if getSqrtRatioAtTick(tickHi) <= sqrtPriceX96 else tickLow)
+        else (
+            tickHi if getSqrtRatioAtTick(tickHi) <= sqrtPriceX96 else tickLow
+        )
     )
 
     return tick

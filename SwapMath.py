@@ -16,7 +16,7 @@ def computeSwapStep(
 
     if exactIn:
         amountRemainingLessFee: int = FullMath.mulDiv(
-            uint256(amountRemaining), 10 ** 6 - feePips, 10 ** 6
+            uint256(amountRemaining), 10**6 - feePips, 10**6
         )
         amountIn = (
             SqrtPriceMath.getAmount0Delta(
@@ -31,7 +31,10 @@ def computeSwapStep(
             sqrtRatioNextX96 = sqrtRatioTargetX96
         else:
             sqrtRatioNextX96 = SqrtPriceMath.getNextSqrtPriceFromInput(
-                sqrtRatioCurrentX96, liquidity, amountRemainingLessFee, zeroForOne
+                sqrtRatioCurrentX96,
+                liquidity,
+                amountRemainingLessFee,
+                zeroForOne,
             )
     else:
         amountOut = (
@@ -47,7 +50,10 @@ def computeSwapStep(
             sqrtRatioNextX96 = sqrtRatioTargetX96
         else:
             sqrtRatioNextX96 = SqrtPriceMath.getNextSqrtPriceFromOutput(
-                sqrtRatioCurrentX96, liquidity, uint256(-amountRemaining), zeroForOne
+                sqrtRatioCurrentX96,
+                liquidity,
+                uint256(-amountRemaining),
+                zeroForOne,
             )
 
     max: bool = sqrtRatioTargetX96 == sqrtRatioNextX96
@@ -91,7 +97,9 @@ def computeSwapStep(
         # we didn't reach the target, so take the remainder of the maximum input as fee
         feeAmount = uint256(amountRemaining) - amountIn
     else:
-        feeAmount = FullMath.mulDivRoundingUp(amountIn, feePips, 10 ** 6 - feePips)
+        feeAmount = FullMath.mulDivRoundingUp(
+            amountIn, feePips, 10**6 - feePips
+        )
 
     return (
         sqrtRatioNextX96,

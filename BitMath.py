@@ -36,32 +36,32 @@ def mostSignificantBit(x: int) -> int:
     return r
 
 
-def mostSignificantBit(x: int) -> int:
+def leastSignificantBit(x: int) -> int:
 
     assert x > 0, "FAIL: x > 0"
 
     r = 255
-    if x & 2 ** 128 - 1 > 0:
+    if x & 2**128 - 1 > 0:
         r -= 128
     else:
         x >>= 128
 
-    if x & 2 ** 64 - 1 > 0:
+    if x & 2**64 - 1 > 0:
         r -= 64
     else:
         x >>= 64
 
-    if x & 2 ** 32 - 1 > 0:
+    if x & 2**32 - 1 > 0:
         r -= 32
     else:
         x >>= 32
 
-    if x & 2 ** 16 - 1 > 0:
+    if x & 2**16 - 1 > 0:
         r -= 16
     else:
         x >>= 16
 
-    if x & 2 ** 8 - 1 > 0:
+    if x & 2**8 - 1 > 0:
         r -= 8
     else:
         x >>= 8

@@ -48,10 +48,15 @@ def nextInitializedTickWithinOneWord(
         initialized_status = masked != 0
         # overflow/underflow is possible, but prevented externally by limiting both tickSpacing and tick
         next_tick = (
-            (compressed + 1 + int24(BitMath.leastSignificantBit(masked) - bitPos))
+            (
+                compressed
+                + 1
+                + int24(BitMath.leastSignificantBit(masked) - bitPos)
+            )
             * tickSpacing
             if initialized_status
-            else (compressed + 1 + int24(type(uint8).max - bitPos)) * tickSpacing
+            else (compressed + 1 + int24(type(uint8).max - bitPos))
+            * tickSpacing
         )
 
     return next_tick, initialized_status
