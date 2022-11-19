@@ -111,8 +111,6 @@ def getAmount0Delta(
 ) -> int:
 
     if roundUp is not None:
-        # print(sqrtRatioAX96)
-        # print(sqrtRatioBX96)
         if sqrtRatioAX96 > sqrtRatioBX96:
             (sqrtRatioAX96, sqrtRatioBX96) = (sqrtRatioBX96, sqrtRatioAX96)
 
