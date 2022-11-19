@@ -43,7 +43,7 @@ def getNextSqrtPriceFromAmount1RoundingDown(
     if add:
         quotient = (
             (amount << FixedPoint96.RESOLUTION) // liquidity
-            if amount <= (2**160) - 1
+            if amount <= 2**160 - 1
             else FullMath.mulDiv(amount, FixedPoint96.Q96, liquidity)
         )
         return uint256(sqrtPX96) + quotient
@@ -111,6 +111,8 @@ def getAmount0Delta(
 ) -> int:
 
     if roundUp is not None:
+        # print(sqrtRatioAX96)
+        # print(sqrtRatioBX96)
         if sqrtRatioAX96 > sqrtRatioBX96:
             (sqrtRatioAX96, sqrtRatioBX96) = (sqrtRatioBX96, sqrtRatioAX96)
 

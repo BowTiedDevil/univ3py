@@ -2,6 +2,8 @@ def mostSignificantBit(x: int) -> int:
 
     assert x > 0, "FAIL: x > 0"
 
+    r = 0
+
     if x >= 0x100000000000000000000000000000000:
         x >>= 128
         r += 128
